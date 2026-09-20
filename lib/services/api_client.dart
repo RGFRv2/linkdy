@@ -143,7 +143,7 @@ class ApiClientService {
   Future<ApiResponse<CheckBookmark>> fetchCheckAddBookmark({required String url}) async {
     try {
       final response = await dioInstance.get(
-        "/bookmarks/check",
+        "/bookmarks/check/",
         queryParameters: {
           "url": url,
         },
