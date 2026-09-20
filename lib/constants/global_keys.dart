@@ -6,6 +6,7 @@ class ScaffoldMessengerKeys {
   static final bookmarks = GlobalKey<ScaffoldMessengerState>();
   static final search = GlobalKey<ScaffoldMessengerState>();
   static final tags = GlobalKey<ScaffoldMessengerState>();
+  static final bundles = GlobalKey<ScaffoldMessengerState>();
   static final addBookmark = GlobalKey<ScaffoldMessengerState>();
   static final filteredBookmarks = GlobalKey<ScaffoldMessengerState>();
 }

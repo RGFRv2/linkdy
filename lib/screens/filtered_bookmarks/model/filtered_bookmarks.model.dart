@@ -3,12 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:linkdy/config/options.dart';
 import 'package:linkdy/constants/enums.dart';
 import 'package:linkdy/models/data/bookmarks.dart';
+import 'package:linkdy/models/data/bookmark_bundles.dart';
 import 'package:linkdy/models/data/tags.dart';
 
 class FilteredBookmarksModel {
   FilteredBookmarksMode filteredBookmarksMode;
   String? tagId;
   Tag? tag;
+  String? bundleId;
+  BookmarkBundle? bundle;
   int currentPage;
   int limit;
   LoadStatus initialLoadStatus;
@@ -22,6 +25,8 @@ class FilteredBookmarksModel {
     this.filteredBookmarksMode = FilteredBookmarksMode.shared,
     this.tagId,
     this.tag,
+    this.bundleId,
+    this.bundle,
     this.currentPage = 0,
     this.limit = ConfigOptions.listLimit,
     this.initialLoadStatus = LoadStatus.loading,

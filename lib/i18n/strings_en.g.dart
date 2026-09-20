@@ -44,6 +44,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final TranslationsOnboardingEn onboarding = TranslationsOnboardingEn._(_root);
 	late final TranslationsBookmarksEn bookmarks = TranslationsBookmarksEn._(_root);
 	late final TranslationsTagsEn tags = TranslationsTagsEn._(_root);
+	late final TranslationsBookmarkBundlesEn bookmarkBundles = TranslationsBookmarkBundlesEn._(_root);
 	late final TranslationsSettingsEn settings = TranslationsSettingsEn._(_root);
 	late final TranslationsWebviewEn webview = TranslationsWebviewEn._(_root);
 	late final TranslationsColorsEn colors = TranslationsColorsEn._(_root);
@@ -270,6 +271,93 @@ class TranslationsTagsEn {
 
 	late final TranslationsTagsCreateTagEn createTag = TranslationsTagsCreateTagEn._(_root);
 	late final TranslationsTagsFilteredBookmarksEn filteredBookmarks = TranslationsTagsFilteredBookmarksEn._(_root);
+}
+
+// Path: bookmarkBundles
+class TranslationsBookmarkBundlesEn {
+	TranslationsBookmarkBundlesEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Bundles'
+	String get bundles => 'Bundles';
+
+	/// en: 'No bundles created'
+	String get noBundles => 'No bundles created';
+
+	/// en: 'Cannot load the bundles'
+	String get cannotLoadBundles => 'Cannot load the bundles';
+
+	/// en: 'Bookmark bundles require Linkding 1.41 or newer.'
+	String get requiresNewerServer => 'Bookmark bundles require Linkding 1.41 or newer.';
+
+	/// en: 'All bookmarks'
+	String get allBookmarks => 'All bookmarks';
+
+	/// en: 'Create bundle'
+	String get createBundle => 'Create bundle';
+
+	/// en: 'Edit bundle'
+	String get editBundle => 'Edit bundle';
+
+	/// en: 'Name'
+	String get name => 'Name';
+
+	/// en: 'Name is required'
+	String get nameRequired => 'Name is required';
+
+	/// en: 'Search'
+	String get search => 'Search';
+
+	/// en: 'Only include bookmarks matching these search terms.'
+	String get searchDescription => 'Only include bookmarks matching these search terms.';
+
+	/// en: 'Any tags'
+	String get anyTags => 'Any tags';
+
+	/// en: 'Include bookmarks with at least one of these tags.'
+	String get anyTagsDescription => 'Include bookmarks with at least one of these tags.';
+
+	/// en: 'All tags'
+	String get allTags => 'All tags';
+
+	/// en: 'Only include bookmarks with all of these tags.'
+	String get allTagsDescription => 'Only include bookmarks with all of these tags.';
+
+	/// en: 'Excluded tags'
+	String get excludedTags => 'Excluded tags';
+
+	/// en: 'Exclude bookmarks with any of these tags.'
+	String get excludedTagsDescription => 'Exclude bookmarks with any of these tags.';
+
+	/// en: 'Add tag'
+	String get addTag => 'Add tag';
+
+	/// en: 'The bundle couldn't be saved.'
+	String get saveError => 'The bundle couldn\'t be saved.';
+
+	/// en: 'Delete bundle'
+	String get deleteBundle => 'Delete bundle';
+
+	/// en: 'Delete'
+	String get delete => 'Delete';
+
+	/// en: 'Delete the bundle ‘$name’?'
+	String deleteConfirmation({required Object name}) => 'Delete the bundle ‘${name}’?';
+
+	/// en: 'Bundle deleted successfully.'
+	String get deletedSuccessfully => 'Bundle deleted successfully.';
+
+	/// en: 'The bundle couldn't be deleted.'
+	String get deleteError => 'The bundle couldn\'t be deleted.';
+
+	/// en: 'The bundle order couldn't be saved.'
+	String get reorderError => 'The bundle order couldn\'t be saved.';
+
+	/// en: 'There are no bookmarks matching this bundle'
+	String get noMatchingBookmarks => 'There are no bookmarks matching this bundle';
 }
 
 // Path: settings
@@ -1021,6 +1109,32 @@ extension on Translations {
 			'tags.filteredBookmarks.noBookmarksWithThisTag' => 'There are no bookmarks with this tag',
 			'tags.filteredBookmarks.noArchivedBookmarks' => 'There are no archived bookmarks',
 			'tags.filteredBookmarks.noSharedBookmarks' => 'There are no shared bookmarks',
+			'bookmarkBundles.bundles' => 'Bundles',
+			'bookmarkBundles.noBundles' => 'No bundles created',
+			'bookmarkBundles.cannotLoadBundles' => 'Cannot load the bundles',
+			'bookmarkBundles.requiresNewerServer' => 'Bookmark bundles require Linkding 1.41 or newer.',
+			'bookmarkBundles.allBookmarks' => 'All bookmarks',
+			'bookmarkBundles.createBundle' => 'Create bundle',
+			'bookmarkBundles.editBundle' => 'Edit bundle',
+			'bookmarkBundles.name' => 'Name',
+			'bookmarkBundles.nameRequired' => 'Name is required',
+			'bookmarkBundles.search' => 'Search',
+			'bookmarkBundles.searchDescription' => 'Only include bookmarks matching these search terms.',
+			'bookmarkBundles.anyTags' => 'Any tags',
+			'bookmarkBundles.anyTagsDescription' => 'Include bookmarks with at least one of these tags.',
+			'bookmarkBundles.allTags' => 'All tags',
+			'bookmarkBundles.allTagsDescription' => 'Only include bookmarks with all of these tags.',
+			'bookmarkBundles.excludedTags' => 'Excluded tags',
+			'bookmarkBundles.excludedTagsDescription' => 'Exclude bookmarks with any of these tags.',
+			'bookmarkBundles.addTag' => 'Add tag',
+			'bookmarkBundles.saveError' => 'The bundle couldn\'t be saved.',
+			'bookmarkBundles.deleteBundle' => 'Delete bundle',
+			'bookmarkBundles.delete' => 'Delete',
+			'bookmarkBundles.deleteConfirmation' => ({required Object name}) => 'Delete the bundle ‘${name}’?',
+			'bookmarkBundles.deletedSuccessfully' => 'Bundle deleted successfully.',
+			'bookmarkBundles.deleteError' => 'The bundle couldn\'t be deleted.',
+			'bookmarkBundles.reorderError' => 'The bundle order couldn\'t be saved.',
+			'bookmarkBundles.noMatchingBookmarks' => 'There are no bookmarks matching this bundle',
 			'settings.settings' => 'Settings',
 			'settings.appSettings' => 'App settings',
 			'settings.aboutApp' => 'About the app',

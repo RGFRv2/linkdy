@@ -6,7 +6,7 @@ enum SelectedTheme { system, light, dark }
 
 enum AuthResult { success, invalidToken, other }
 
-enum FilteredBookmarksMode { tag, shared, archived }
+enum FilteredBookmarksMode { tag, bundle, shared, archived }
 
 enum ReadStatus { all, unread, read }
 
@@ -18,7 +18,8 @@ enum OpenLinksBrowser { integrated, browserCustomTab, systemBrowser }
 
 extension OpenLinksBrowserExtension on OpenLinksBrowser {
   static OpenLinksBrowser? fromString(String? value) {
-    if (value == null || !OpenLinksBrowser.values.map((v) => v.toString()).contains(value)) {
+    if (value == null ||
+        !OpenLinksBrowser.values.map((v) => v.toString()).contains(value)) {
       return null;
     }
     return OpenLinksBrowser.values.firstWhere((e) => e.toString() == value);

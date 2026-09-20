@@ -41,6 +41,7 @@ class TranslationsCs with BaseTranslations<AppLocale, Translations> implements T
 	@override late final _TranslationsOnboardingCs onboarding = _TranslationsOnboardingCs._(_root);
 	@override late final _TranslationsBookmarksCs bookmarks = _TranslationsBookmarksCs._(_root);
 	@override late final _TranslationsTagsCs tags = _TranslationsTagsCs._(_root);
+	@override late final _TranslationsBookmarkBundlesCs bookmarkBundles = _TranslationsBookmarkBundlesCs._(_root);
 	@override late final _TranslationsSettingsCs settings = _TranslationsSettingsCs._(_root);
 	@override late final _TranslationsWebviewCs webview = _TranslationsWebviewCs._(_root);
 	@override late final _TranslationsColorsCs colors = _TranslationsColorsCs._(_root);
@@ -146,6 +147,41 @@ class _TranslationsTagsCs implements TranslationsTagsEn {
 	@override String created({required Object created}) => 'Vytvořeno: ${created}';
 	@override late final _TranslationsTagsCreateTagCs createTag = _TranslationsTagsCreateTagCs._(_root);
 	@override late final _TranslationsTagsFilteredBookmarksCs filteredBookmarks = _TranslationsTagsFilteredBookmarksCs._(_root);
+}
+
+// Path: bookmarkBundles
+class _TranslationsBookmarkBundlesCs implements TranslationsBookmarkBundlesEn {
+	_TranslationsBookmarkBundlesCs._(this._root);
+
+	final TranslationsCs _root; // ignore: unused_field
+
+	// Translations
+	@override String get bundles => 'Balíčky';
+	@override String get noBundles => 'Nebyly vytvořeny žádné balíčky';
+	@override String get cannotLoadBundles => 'Balíčky nelze načíst';
+	@override String get requiresNewerServer => 'Balíčky záložek vyžadují Linkding 1.41 nebo novější.';
+	@override String get allBookmarks => 'Všechny záložky';
+	@override String get createBundle => 'Vytvořit balíček';
+	@override String get editBundle => 'Upravit balíček';
+	@override String get name => 'Název';
+	@override String get nameRequired => 'Název je povinný';
+	@override String get search => 'Hledání';
+	@override String get searchDescription => 'Zahrnout pouze záložky odpovídající těmto výrazům.';
+	@override String get anyTags => 'Libovolné štítky';
+	@override String get anyTagsDescription => 'Zahrnout záložky alespoň s jedním z těchto štítků.';
+	@override String get allTags => 'Všechny štítky';
+	@override String get allTagsDescription => 'Zahrnout pouze záložky se všemi těmito štítky.';
+	@override String get excludedTags => 'Vyloučené štítky';
+	@override String get excludedTagsDescription => 'Vyloučit záložky s kterýmkoli z těchto štítků.';
+	@override String get addTag => 'Přidat štítek';
+	@override String get saveError => 'Balíček se nepodařilo uložit.';
+	@override String get deleteBundle => 'Odstranit balíček';
+	@override String get delete => 'Odstranit';
+	@override String deleteConfirmation({required Object name}) => 'Odstranit balíček „${name}“?';
+	@override String get deletedSuccessfully => 'Balíček byl úspěšně odstraněn.';
+	@override String get deleteError => 'Balíček se nepodařilo odstranit.';
+	@override String get reorderError => 'Pořadí balíčků se nepodařilo uložit.';
+	@override String get noMatchingBookmarks => 'Tomuto balíčku neodpovídají žádné záložky';
 }
 
 // Path: settings
@@ -586,6 +622,32 @@ extension on TranslationsCs {
 			'tags.filteredBookmarks.noBookmarksWithThisTag' => 'Žádné záložky s tímto štítkem',
 			'tags.filteredBookmarks.noArchivedBookmarks' => 'Žádné archivované záložky',
 			'tags.filteredBookmarks.noSharedBookmarks' => 'Žádné sdílené záložky',
+			'bookmarkBundles.bundles' => 'Balíčky',
+			'bookmarkBundles.noBundles' => 'Nebyly vytvořeny žádné balíčky',
+			'bookmarkBundles.cannotLoadBundles' => 'Balíčky nelze načíst',
+			'bookmarkBundles.requiresNewerServer' => 'Balíčky záložek vyžadují Linkding 1.41 nebo novější.',
+			'bookmarkBundles.allBookmarks' => 'Všechny záložky',
+			'bookmarkBundles.createBundle' => 'Vytvořit balíček',
+			'bookmarkBundles.editBundle' => 'Upravit balíček',
+			'bookmarkBundles.name' => 'Název',
+			'bookmarkBundles.nameRequired' => 'Název je povinný',
+			'bookmarkBundles.search' => 'Hledání',
+			'bookmarkBundles.searchDescription' => 'Zahrnout pouze záložky odpovídající těmto výrazům.',
+			'bookmarkBundles.anyTags' => 'Libovolné štítky',
+			'bookmarkBundles.anyTagsDescription' => 'Zahrnout záložky alespoň s jedním z těchto štítků.',
+			'bookmarkBundles.allTags' => 'Všechny štítky',
+			'bookmarkBundles.allTagsDescription' => 'Zahrnout pouze záložky se všemi těmito štítky.',
+			'bookmarkBundles.excludedTags' => 'Vyloučené štítky',
+			'bookmarkBundles.excludedTagsDescription' => 'Vyloučit záložky s kterýmkoli z těchto štítků.',
+			'bookmarkBundles.addTag' => 'Přidat štítek',
+			'bookmarkBundles.saveError' => 'Balíček se nepodařilo uložit.',
+			'bookmarkBundles.deleteBundle' => 'Odstranit balíček',
+			'bookmarkBundles.delete' => 'Odstranit',
+			'bookmarkBundles.deleteConfirmation' => ({required Object name}) => 'Odstranit balíček „${name}“?',
+			'bookmarkBundles.deletedSuccessfully' => 'Balíček byl úspěšně odstraněn.',
+			'bookmarkBundles.deleteError' => 'Balíček se nepodařilo odstranit.',
+			'bookmarkBundles.reorderError' => 'Pořadí balíčků se nepodařilo uložit.',
+			'bookmarkBundles.noMatchingBookmarks' => 'Tomuto balíčku neodpovídají žádné záložky',
 			'settings.settings' => 'Nastavení',
 			'settings.appSettings' => 'Nastavení aplikace',
 			'settings.aboutApp' => 'O aplikaci',

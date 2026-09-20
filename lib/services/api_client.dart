@@ -3,6 +3,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'package:linkdy/constants/enums.dart';
 import 'package:linkdy/models/api_response.dart';
+import 'package:linkdy/models/data/bookmark_bundles.dart';
 import 'package:linkdy/models/data/bookmarks.dart';
 import 'package:linkdy/models/data/check_bookmark.dart';
 import 'package:linkdy/models/data/patch_bookmark_data.dart';
@@ -53,6 +54,7 @@ class ApiClientService {
     int? offset,
     ReadStatus? unread,
     String? sort,
+    int? bundleId,
   }) async {
     try {
       final response = await dioInstance.get(
@@ -67,6 +69,7 @@ class ApiClientService {
                   ? "no"
                   : null,
           "sort": sort,
+          "bundle": bundleId,
         },
       );
       if (response.statusCode == null || response.statusCode! >= 400) {
@@ -81,6 +84,130 @@ class ApiClientService {
     } on FormatException catch (e, stackTrace) {
       Sentry.captureException(e, stackTrace: stackTrace);
       return const ApiResponse(successful: false);
+    } catch (_) {
+      return const ApiResponse(successful: false);
+    }
+  }
+
+  Future<ApiResponse<BookmarkBundlesResponse>> fetchBookmarkBundles({
+    int? limit,
+    int? offset,
+  }) async {
+    try {
+      final response = await dioInstance.get(
+        "/bundles/",
+        queryParameters: {
+          "limit": limit,
+          "offset": offset,
+        },
+      );
+      if (response.statusCode == null || response.statusCode! >= 400) {
+        return ApiResponse(successful: false, statusCode: response.statusCode);
+      }
+      return ApiResponse(
+        successful: true,
+        content: BookmarkBundlesResponse.fromJson(response.data),
+        statusCode: response.statusCode,
+      );
+    } on DioException catch (e) {
+      return ApiResponse(successful: false, statusCode: e.response?.statusCode);
+    } on FormatException catch (e, stackTrace) {
+      Sentry.captureException(e, stackTrace: stackTrace);
+      return const ApiResponse(successful: false);
+    } catch (_) {
+      return const ApiResponse(successful: false);
+    }
+  }
+
+  Future<ApiResponse<BookmarkBundle>> fetchBookmarkBundleById(
+    int bundleId,
+  ) async {
+    try {
+      final response = await dioInstance.get("/bundles/$bundleId/");
+      if (response.statusCode == null || response.statusCode! >= 400) {
+        return ApiResponse(successful: false, statusCode: response.statusCode);
+      }
+      return ApiResponse(
+        successful: true,
+        content: BookmarkBundle.fromJson(response.data),
+        statusCode: response.statusCode,
+      );
+    } on DioException catch (e) {
+      return ApiResponse(successful: false, statusCode: e.response?.statusCode);
+    } on FormatException catch (e, stackTrace) {
+      Sentry.captureException(e, stackTrace: stackTrace);
+      return const ApiResponse(successful: false);
+    } catch (_) {
+      return const ApiResponse(successful: false);
+    }
+  }
+
+  Future<ApiResponse<BookmarkBundle>> postBookmarkBundle(
+    SetBookmarkBundleData bundle,
+  ) async {
+    try {
+      final response = await dioInstance.post(
+        "/bundles/",
+        data: FormData.fromMap(bundle.toJson()),
+      );
+      if (response.statusCode == null || response.statusCode! >= 400) {
+        return ApiResponse(successful: false, statusCode: response.statusCode);
+      }
+      return ApiResponse(
+        successful: true,
+        content: BookmarkBundle.fromJson(response.data),
+        statusCode: response.statusCode,
+      );
+    } on DioException catch (e) {
+      return ApiResponse(successful: false, statusCode: e.response?.statusCode);
+    } on FormatException catch (e, stackTrace) {
+      Sentry.captureException(e, stackTrace: stackTrace);
+      return const ApiResponse(successful: false);
+    } catch (_) {
+      return const ApiResponse(successful: false);
+    }
+  }
+
+  Future<ApiResponse<BookmarkBundle>> patchBookmarkBundle(
+    int bundleId,
+    Map<String, dynamic> data,
+  ) async {
+    try {
+      final response = await dioInstance.patch(
+        "/bundles/$bundleId/",
+        data: FormData.fromMap(data),
+      );
+      if (response.statusCode == null || response.statusCode! >= 400) {
+        return ApiResponse(successful: false, statusCode: response.statusCode);
+      }
+      return ApiResponse(
+        successful: true,
+        content: BookmarkBundle.fromJson(response.data),
+        statusCode: response.statusCode,
+      );
+    } on DioException catch (e) {
+      return ApiResponse(successful: false, statusCode: e.response?.statusCode);
+    } on FormatException catch (e, stackTrace) {
+      Sentry.captureException(e, stackTrace: stackTrace);
+      return const ApiResponse(successful: false);
+    } catch (_) {
+      return const ApiResponse(successful: false);
+    }
+  }
+
+  Future<ApiResponse<bool>> deleteBookmarkBundle(int bundleId) async {
+    try {
+      final response = await dioInstance.delete("/bundles/$bundleId/");
+      if (response.statusCode == null || response.statusCode! >= 400) {
+        return ApiResponse(successful: false, statusCode: response.statusCode);
+      }
+      return ApiResponse(
+        successful: true,
+        content: true,
+        statusCode: response.statusCode,
+      );
+    } on DioException catch (e) {
+      return ApiResponse(successful: false, statusCode: e.response?.statusCode);
     } catch (_) {
       return const ApiResponse(successful: false);
     }

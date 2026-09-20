@@ -41,6 +41,7 @@ class TranslationsEs with BaseTranslations<AppLocale, Translations> implements T
 	@override late final _TranslationsOnboardingEs onboarding = _TranslationsOnboardingEs._(_root);
 	@override late final _TranslationsBookmarksEs bookmarks = _TranslationsBookmarksEs._(_root);
 	@override late final _TranslationsTagsEs tags = _TranslationsTagsEs._(_root);
+	@override late final _TranslationsBookmarkBundlesEs bookmarkBundles = _TranslationsBookmarkBundlesEs._(_root);
 	@override late final _TranslationsSettingsEs settings = _TranslationsSettingsEs._(_root);
 	@override late final _TranslationsWebviewEs webview = _TranslationsWebviewEs._(_root);
 	@override late final _TranslationsColorsEs colors = _TranslationsColorsEs._(_root);
@@ -146,6 +147,41 @@ class _TranslationsTagsEs implements TranslationsTagsEn {
 	@override String created({required Object created}) => 'Creado: ${created}';
 	@override late final _TranslationsTagsCreateTagEs createTag = _TranslationsTagsCreateTagEs._(_root);
 	@override late final _TranslationsTagsFilteredBookmarksEs filteredBookmarks = _TranslationsTagsFilteredBookmarksEs._(_root);
+}
+
+// Path: bookmarkBundles
+class _TranslationsBookmarkBundlesEs implements TranslationsBookmarkBundlesEn {
+	_TranslationsBookmarkBundlesEs._(this._root);
+
+	final TranslationsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get bundles => 'Colecciones';
+	@override String get noBundles => 'No hay colecciones creadas';
+	@override String get cannotLoadBundles => 'No se pueden cargar las colecciones';
+	@override String get requiresNewerServer => 'Las colecciones requieren Linkding 1.41 o posterior.';
+	@override String get allBookmarks => 'Todos los marcadores';
+	@override String get createBundle => 'Crear colección';
+	@override String get editBundle => 'Editar colección';
+	@override String get name => 'Nombre';
+	@override String get nameRequired => 'El nombre es obligatorio';
+	@override String get search => 'Búsqueda';
+	@override String get searchDescription => 'Incluye solo los marcadores que coincidan con estos términos.';
+	@override String get anyTags => 'Cualquier etiqueta';
+	@override String get anyTagsDescription => 'Incluye marcadores con al menos una de estas etiquetas.';
+	@override String get allTags => 'Todas las etiquetas';
+	@override String get allTagsDescription => 'Incluye solo marcadores con todas estas etiquetas.';
+	@override String get excludedTags => 'Etiquetas excluidas';
+	@override String get excludedTagsDescription => 'Excluye marcadores con cualquiera de estas etiquetas.';
+	@override String get addTag => 'Añadir etiqueta';
+	@override String get saveError => 'No se pudo guardar la colección.';
+	@override String get deleteBundle => 'Eliminar colección';
+	@override String get delete => 'Eliminar';
+	@override String deleteConfirmation({required Object name}) => '¿Eliminar la colección «${name}»?';
+	@override String get deletedSuccessfully => 'Colección eliminada correctamente.';
+	@override String get deleteError => 'No se pudo eliminar la colección.';
+	@override String get reorderError => 'No se pudo guardar el orden de las colecciones.';
+	@override String get noMatchingBookmarks => 'No hay marcadores que coincidan con esta colección';
 }
 
 // Path: settings
@@ -586,6 +622,32 @@ extension on TranslationsEs {
 			'tags.filteredBookmarks.noBookmarksWithThisTag' => 'No hay marcadores con esta etiqueta',
 			'tags.filteredBookmarks.noArchivedBookmarks' => 'No hay marcadores archivados',
 			'tags.filteredBookmarks.noSharedBookmarks' => 'No hay marcadores compartidos',
+			'bookmarkBundles.bundles' => 'Colecciones',
+			'bookmarkBundles.noBundles' => 'No hay colecciones creadas',
+			'bookmarkBundles.cannotLoadBundles' => 'No se pueden cargar las colecciones',
+			'bookmarkBundles.requiresNewerServer' => 'Las colecciones requieren Linkding 1.41 o posterior.',
+			'bookmarkBundles.allBookmarks' => 'Todos los marcadores',
+			'bookmarkBundles.createBundle' => 'Crear colección',
+			'bookmarkBundles.editBundle' => 'Editar colección',
+			'bookmarkBundles.name' => 'Nombre',
+			'bookmarkBundles.nameRequired' => 'El nombre es obligatorio',
+			'bookmarkBundles.search' => 'Búsqueda',
+			'bookmarkBundles.searchDescription' => 'Incluye solo los marcadores que coincidan con estos términos.',
+			'bookmarkBundles.anyTags' => 'Cualquier etiqueta',
+			'bookmarkBundles.anyTagsDescription' => 'Incluye marcadores con al menos una de estas etiquetas.',
+			'bookmarkBundles.allTags' => 'Todas las etiquetas',
+			'bookmarkBundles.allTagsDescription' => 'Incluye solo marcadores con todas estas etiquetas.',
+			'bookmarkBundles.excludedTags' => 'Etiquetas excluidas',
+			'bookmarkBundles.excludedTagsDescription' => 'Excluye marcadores con cualquiera de estas etiquetas.',
+			'bookmarkBundles.addTag' => 'Añadir etiqueta',
+			'bookmarkBundles.saveError' => 'No se pudo guardar la colección.',
+			'bookmarkBundles.deleteBundle' => 'Eliminar colección',
+			'bookmarkBundles.delete' => 'Eliminar',
+			'bookmarkBundles.deleteConfirmation' => ({required Object name}) => '¿Eliminar la colección «${name}»?',
+			'bookmarkBundles.deletedSuccessfully' => 'Colección eliminada correctamente.',
+			'bookmarkBundles.deleteError' => 'No se pudo eliminar la colección.',
+			'bookmarkBundles.reorderError' => 'No se pudo guardar el orden de las colecciones.',
+			'bookmarkBundles.noMatchingBookmarks' => 'No hay marcadores que coincidan con esta colección',
 			'settings.settings' => 'Ajustes',
 			'settings.appSettings' => 'Ajustes de la aplicación',
 			'settings.aboutApp' => 'Sobre la aplicación',

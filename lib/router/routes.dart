@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:linkdy/router/names.dart';
 
 import 'package:linkdy/screens/bookmarks/ui/bookmarks.dart';
+import 'package:linkdy/screens/bundles/ui/bundles.dart';
 import 'package:linkdy/screens/onboarding/ui/onboarding.dart';
 import 'package:linkdy/screens/settings/ui/customization/customization.dart';
 import 'package:linkdy/screens/settings/ui/default_tags/default_tags.dart';
@@ -15,6 +16,7 @@ import 'package:linkdy/widgets/page_transition.dart';
 
 import 'package:linkdy/constants/enums.dart';
 import 'package:linkdy/models/data/tags.dart';
+import 'package:linkdy/models/data/bookmark_bundles.dart';
 import 'package:linkdy/models/data/bookmarks.dart';
 import 'package:linkdy/router/paths.dart';
 
@@ -37,6 +39,10 @@ final List<RouteBase> appRoutes = [
     builder: (context, state) => const PageTransition(child: TagsScreen()),
   ),
   GoRoute(
+    path: RoutesPaths.bundles,
+    builder: (context, state) => const PageTransition(child: BundlesScreen()),
+  ),
+  GoRoute(
     path: RoutesPaths.settings,
     builder: (context, state) => const PageTransition(child: SettingsScreen()),
   ),
@@ -52,6 +58,15 @@ final List<RouteBase> appRoutes = [
   GoRoute(
     path: RoutesPaths.sharedBookmarks,
     builder: (context, state) => const FilteredBookmarksScreen(filteredBookmarksMode: FilteredBookmarksMode.shared),
+  ),
+  GoRoute(
+    path: RoutesPaths.bundleBookmarks,
+    name: RoutesNames.bundleBookmarks,
+    builder: (context, state) => FilteredBookmarksScreen(
+      filteredBookmarksMode: FilteredBookmarksMode.bundle,
+      bundleId: state.pathParameters['id'],
+      bundle: state.extra as BookmarkBundle?,
+    ),
   ),
   GoRoute(
     path: RoutesPaths.archivedBookmarks,

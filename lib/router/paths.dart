@@ -5,6 +5,8 @@ class RoutesPaths {
   static const webview = "/webview";
   static const tags = "/tags";
   static const tagBookmarks = "/tags/:id";
+  static const bundles = "/bundles";
+  static const bundleBookmarks = "/bundles/:id";
   static const sharedBookmarks = "/bookmarks/shared";
   static const archivedBookmarks = "/bookmarks/archived";
   static const settings = "/settings";

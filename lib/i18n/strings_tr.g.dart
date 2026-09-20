@@ -41,6 +41,7 @@ class TranslationsTr with BaseTranslations<AppLocale, Translations> implements T
 	@override late final _TranslationsOnboardingTr onboarding = _TranslationsOnboardingTr._(_root);
 	@override late final _TranslationsBookmarksTr bookmarks = _TranslationsBookmarksTr._(_root);
 	@override late final _TranslationsTagsTr tags = _TranslationsTagsTr._(_root);
+	@override late final _TranslationsBookmarkBundlesTr bookmarkBundles = _TranslationsBookmarkBundlesTr._(_root);
 	@override late final _TranslationsSettingsTr settings = _TranslationsSettingsTr._(_root);
 	@override late final _TranslationsWebviewTr webview = _TranslationsWebviewTr._(_root);
 	@override late final _TranslationsColorsTr colors = _TranslationsColorsTr._(_root);
@@ -146,6 +147,41 @@ class _TranslationsTagsTr implements TranslationsTagsEn {
 	@override String created({required Object created}) => 'Oluşturuldu: ${created}';
 	@override late final _TranslationsTagsCreateTagTr createTag = _TranslationsTagsCreateTagTr._(_root);
 	@override late final _TranslationsTagsFilteredBookmarksTr filteredBookmarks = _TranslationsTagsFilteredBookmarksTr._(_root);
+}
+
+// Path: bookmarkBundles
+class _TranslationsBookmarkBundlesTr implements TranslationsBookmarkBundlesEn {
+	_TranslationsBookmarkBundlesTr._(this._root);
+
+	final TranslationsTr _root; // ignore: unused_field
+
+	// Translations
+	@override String get bundles => 'Paketler';
+	@override String get noBundles => 'Henüz paket oluşturulmadı';
+	@override String get cannotLoadBundles => 'Paketler yüklenemiyor';
+	@override String get requiresNewerServer => 'Yer işareti paketleri Linkding 1.41 veya daha yenisini gerektirir.';
+	@override String get allBookmarks => 'Tüm yer işaretleri';
+	@override String get createBundle => 'Paket oluştur';
+	@override String get editBundle => 'Paketi düzenle';
+	@override String get name => 'Ad';
+	@override String get nameRequired => 'Ad zorunludur';
+	@override String get search => 'Arama';
+	@override String get searchDescription => 'Yalnızca bu arama terimleriyle eşleşen yer işaretlerini dahil et.';
+	@override String get anyTags => 'Herhangi bir etiket';
+	@override String get anyTagsDescription => 'Bu etiketlerden en az birine sahip yer işaretlerini dahil et.';
+	@override String get allTags => 'Tüm etiketler';
+	@override String get allTagsDescription => 'Yalnızca bu etiketlerin tümüne sahip yer işaretlerini dahil et.';
+	@override String get excludedTags => 'Hariç tutulan etiketler';
+	@override String get excludedTagsDescription => 'Bu etiketlerden herhangi birine sahip yer işaretlerini hariç tut.';
+	@override String get addTag => 'Etiket ekle';
+	@override String get saveError => 'Paket kaydedilemedi.';
+	@override String get deleteBundle => 'Paketi sil';
+	@override String get delete => 'Sil';
+	@override String deleteConfirmation({required Object name}) => '‘${name}’ paketi silinsin mi?';
+	@override String get deletedSuccessfully => 'Paket başarıyla silindi.';
+	@override String get deleteError => 'Paket silinemedi.';
+	@override String get reorderError => 'Paket sırası kaydedilemedi.';
+	@override String get noMatchingBookmarks => 'Bu paketle eşleşen yer işareti yok';
 }
 
 // Path: settings
@@ -586,6 +622,32 @@ extension on TranslationsTr {
 			'tags.filteredBookmarks.noBookmarksWithThisTag' => 'Bu etikete sahip yer işareti yok',
 			'tags.filteredBookmarks.noArchivedBookmarks' => 'Arşivlenmiş yer işareti yok',
 			'tags.filteredBookmarks.noSharedBookmarks' => 'Paylaşılmış yer işareti yok',
+			'bookmarkBundles.bundles' => 'Paketler',
+			'bookmarkBundles.noBundles' => 'Henüz paket oluşturulmadı',
+			'bookmarkBundles.cannotLoadBundles' => 'Paketler yüklenemiyor',
+			'bookmarkBundles.requiresNewerServer' => 'Yer işareti paketleri Linkding 1.41 veya daha yenisini gerektirir.',
+			'bookmarkBundles.allBookmarks' => 'Tüm yer işaretleri',
+			'bookmarkBundles.createBundle' => 'Paket oluştur',
+			'bookmarkBundles.editBundle' => 'Paketi düzenle',
+			'bookmarkBundles.name' => 'Ad',
+			'bookmarkBundles.nameRequired' => 'Ad zorunludur',
+			'bookmarkBundles.search' => 'Arama',
+			'bookmarkBundles.searchDescription' => 'Yalnızca bu arama terimleriyle eşleşen yer işaretlerini dahil et.',
+			'bookmarkBundles.anyTags' => 'Herhangi bir etiket',
+			'bookmarkBundles.anyTagsDescription' => 'Bu etiketlerden en az birine sahip yer işaretlerini dahil et.',
+			'bookmarkBundles.allTags' => 'Tüm etiketler',
+			'bookmarkBundles.allTagsDescription' => 'Yalnızca bu etiketlerin tümüne sahip yer işaretlerini dahil et.',
+			'bookmarkBundles.excludedTags' => 'Hariç tutulan etiketler',
+			'bookmarkBundles.excludedTagsDescription' => 'Bu etiketlerden herhangi birine sahip yer işaretlerini hariç tut.',
+			'bookmarkBundles.addTag' => 'Etiket ekle',
+			'bookmarkBundles.saveError' => 'Paket kaydedilemedi.',
+			'bookmarkBundles.deleteBundle' => 'Paketi sil',
+			'bookmarkBundles.delete' => 'Sil',
+			'bookmarkBundles.deleteConfirmation' => ({required Object name}) => '‘${name}’ paketi silinsin mi?',
+			'bookmarkBundles.deletedSuccessfully' => 'Paket başarıyla silindi.',
+			'bookmarkBundles.deleteError' => 'Paket silinemedi.',
+			'bookmarkBundles.reorderError' => 'Paket sırası kaydedilemedi.',
+			'bookmarkBundles.noMatchingBookmarks' => 'Bu paketle eşleşen yer işareti yok',
 			'settings.settings' => 'Ayarlar',
 			'settings.appSettings' => 'Uygulama ayarları',
 			'settings.aboutApp' => 'Uygulama hakkında',

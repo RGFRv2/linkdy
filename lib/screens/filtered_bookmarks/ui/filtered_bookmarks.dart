@@ -11,6 +11,7 @@ import 'package:linkdy/widgets/no_data_screen.dart';
 
 import 'package:linkdy/config/sizes.dart';
 import 'package:linkdy/constants/global_keys.dart';
+import 'package:linkdy/models/data/bookmark_bundles.dart';
 import 'package:linkdy/models/data/tags.dart';
 import 'package:linkdy/constants/enums.dart';
 import 'package:linkdy/providers/router.provider.dart';
@@ -21,12 +22,16 @@ class FilteredBookmarksScreen extends HookConsumerWidget {
   final FilteredBookmarksMode filteredBookmarksMode;
   final String? tagId;
   final Tag? tag;
+  final String? bundleId;
+  final BookmarkBundle? bundle;
 
   const FilteredBookmarksScreen({
     super.key,
     required this.filteredBookmarksMode,
     this.tagId,
     this.tag,
+    this.bundleId,
+    this.bundle,
   });
 
   @override
@@ -50,6 +55,26 @@ class FilteredBookmarksScreen extends HookConsumerWidget {
             ref.read(filteredBookmarksProvider).tagId = tagId;
           }
           ref.read(tagBookmarksRequestProvider(tag, tagId, ref.read(filteredBookmarksProvider).limit));
+        } else if (filteredBookmarksMode == FilteredBookmarksMode.bundle) {
+          if (bundle == null && bundleId == null) {
+            final router = ref.read(routerProvider);
+            while (router.canPop() == true) {
+              router.pop();
+            }
+            router.pushReplacement(RoutesPaths.bundles);
+            return;
+          }
+          if (bundle != null) {
+            ref.read(filteredBookmarksProvider).bundle = bundle;
+          }
+          if (bundleId != null) {
+            ref.read(filteredBookmarksProvider).bundleId = bundleId;
+          }
+          ref.read(filteredBookmarksProvider.notifier).loadBundle(
+                bundle,
+                bundleId,
+                limit: ref.read(filteredBookmarksProvider).limit,
+              );
         } else {
           ref.read(
             filteredBookmarksRequestProvider(filteredBookmarksMode, ref.read(filteredBookmarksProvider).limit),
@@ -57,10 +82,15 @@ class FilteredBookmarksScreen extends HookConsumerWidget {
         }
         return null;
       },
-      [filteredBookmarksMode, tagId, tag],
+      [filteredBookmarksMode, tagId, tag, bundleId, bundle],
     );
 
-    if (filteredBookmarksMode == FilteredBookmarksMode.tag && tag == null && tagId == null) {
+    if ((filteredBookmarksMode == FilteredBookmarksMode.tag &&
+            tag == null &&
+            tagId == null) ||
+        (filteredBookmarksMode == FilteredBookmarksMode.bundle &&
+            bundle == null &&
+            bundleId == null)) {
       return const Material();
     }
 
@@ -77,6 +107,7 @@ class FilteredBookmarksScreen extends HookConsumerWidget {
                     child: _List(
                       filteredBookmarksMode: filteredBookmarksMode,
                       tag: tag,
+                      bundle: bundle,
                       tabletMode: true,
                     ),
                   ),
@@ -93,6 +124,7 @@ class FilteredBookmarksScreen extends HookConsumerWidget {
             return _List(
               filteredBookmarksMode: filteredBookmarksMode,
               tag: tag,
+              bundle: bundle,
               tabletMode: false,
             );
           }
@@ -106,10 +138,12 @@ class _List extends ConsumerWidget {
   final bool tabletMode;
   final FilteredBookmarksMode filteredBookmarksMode;
   final Tag? tag;
+  final BookmarkBundle? bundle;
 
   const _List({
     required this.filteredBookmarksMode,
     this.tag,
+    this.bundle,
     required this.tabletMode,
   });
 
@@ -124,7 +158,7 @@ class _List extends ConsumerWidget {
           provider.loadingMore == false &&
           provider.bookmarks.length < provider.maxNumber) {
         ref.read(filteredBookmarksProvider.notifier).setLoadingMore(true);
-        ref.read(tagBookmarksRequestLoadMoreProvider);
+        ref.read(filteredBookmarksRequestLoadMoreProvider);
       }
       return false;
     }
@@ -138,6 +172,9 @@ class _List extends ConsumerWidget {
                   ? "#${provider.tag!.name}"
                   : '';
 
+        case FilteredBookmarksMode.bundle:
+          return bundle?.name ?? provider.bundle?.name ?? "";
+
         case FilteredBookmarksMode.archived:
           return t.bookmarks.archived;
 
@@ -150,6 +187,9 @@ class _List extends ConsumerWidget {
       switch (filteredBookmarksMode) {
         case FilteredBookmarksMode.tag:
           return t.tags.filteredBookmarks.noBookmarksWithThisTag;
+
+        case FilteredBookmarksMode.bundle:
+          return t.bookmarkBundles.noMatchingBookmarks;
 
         case FilteredBookmarksMode.archived:
           return t.tags.filteredBookmarks.noArchivedBookmarks;
@@ -197,7 +237,8 @@ class _List extends ConsumerWidget {
                           error: t.bookmarks.cannotLoadBookmarks,
                         ),
                       ),
-                    if (provider.bookmarks.isEmpty)
+                    if (provider.initialLoadStatus == LoadStatus.loaded &&
+                        provider.bookmarks.isEmpty)
                       SliverFillRemaining(
                         child: NoDataScreen(
                           message: noContent(),

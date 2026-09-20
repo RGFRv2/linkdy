@@ -201,6 +201,18 @@ class _List extends ConsumerWidget {
                       ),
                       const PopupMenuDivider(height: 1),
                       PopupMenuItem(
+                        onTap: () => ref
+                            .read(bookmarksProvider.notifier)
+                            .pushRoute(RoutesPaths.bundles, tabletMode),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.folder_rounded),
+                            const SizedBox(width: 16),
+                            Text(t.bookmarkBundles.bundles),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
                         onTap: () => ref.read(bookmarksProvider.notifier).pushRoute(RoutesPaths.tags, tabletMode),
                         child: Row(
                           children: [
