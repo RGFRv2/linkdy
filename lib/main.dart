@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -33,8 +32,6 @@ void main() async {
 
   HttpOverrides.global = MyHttpOverrides();
 
-  await dotenv.load(fileName: '.env');
-
   final sharedPreferences = await SharedPreferences.getInstance();
 
   final appInfo = await PackageInfo.fromPlatform();
@@ -51,11 +48,12 @@ void main() async {
         ),
       );
 
-  if ((kReleaseMode && (dotenv.env['SENTRY_DSN'] != null && dotenv.env['SENTRY_DSN'] != "")) ||
-      (dotenv.env['ENABLE_SENTRY'] == "true" && (dotenv.env['SENTRY_DSN'] != null && dotenv.env['SENTRY_DSN'] != ""))) {
+  const sentryDsn = String.fromEnvironment('SENTRY_DSN');
+  const enableSentry = bool.fromEnvironment('ENABLE_SENTRY');
+  if ((kReleaseMode || enableSentry) && sentryDsn.isNotEmpty) {
     SentryFlutter.init(
       (options) {
-        options.dsn = dotenv.env['SENTRY_DSN'];
+        options.dsn = sentryDsn;
         options.sendDefaultPii = false;
         options.beforeSend = sentryHandleError;
       },
@@ -98,7 +96,10 @@ class _MyAppState extends ConsumerState<MyApp> {
           ReceiveSharingIntent.instance.reset();
         }
       },
-      onError: (e, stackTrace) => Sentry.captureException(e, stackTrace: stackTrace),
+      onError: (e, stackTrace) {
+        Sentry.captureException(e, stackTrace: stackTrace);
+        return null;
+      },
     );
   }
 
