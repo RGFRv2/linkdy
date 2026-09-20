@@ -1,3 +1,0 @@
-input_directory: lib/i18n
-input_file_pattern: .i18n.json
-output_directory: lib/i18n
