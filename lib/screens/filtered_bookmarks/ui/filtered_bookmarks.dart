@@ -70,11 +70,14 @@ class FilteredBookmarksScreen extends HookConsumerWidget {
           if (bundleId != null) {
             ref.read(filteredBookmarksProvider).bundleId = bundleId;
           }
-          ref.read(filteredBookmarksProvider.notifier).loadBundle(
-                bundle,
-                bundleId,
-                limit: ref.read(filteredBookmarksProvider).limit,
-              );
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!context.mounted) return;
+            ref.read(filteredBookmarksProvider.notifier).loadBundle(
+                  bundle,
+                  bundleId,
+                  limit: ref.read(filteredBookmarksProvider).limit,
+                );
+          });
         } else {
           ref.read(
             filteredBookmarksRequestProvider(filteredBookmarksMode, ref.read(filteredBookmarksProvider).limit),
